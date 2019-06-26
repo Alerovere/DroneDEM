@@ -10,3 +10,5 @@ The two required inputs are:
 ❮img src="images/you-picture.png" ❯
 
 <b>Data_analysis.m</b> - This script takes the results of the previous step and plots them together into a summary figure. Before the final figure is produced, the user needs to insert manually the picture overlap, that is usually available in the processing reports of photogrammetric software. This script needs the Matlab 'Statistics and Machine Learning Toolbox'
+
+All the images and files are placed into the "Results" folder.
