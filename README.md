@@ -11,6 +11,6 @@ The two required inputs are:
 
 <b>Data_analysis.m</b> - This script takes the results of the previous step and plots them together into a summary figure. Before the final figure is produced, the user needs to insert manually the picture overlap, that is usually available in the processing reports of photogrammetric software. This script needs the Matlab 'Statistics and Machine Learning Toolbox'
 
-![Results_2](https://github.com/Alerovere/DroneDEM/blob/master/Results/Canon%20S100%2050m.png)
+![Results_2](https://github.com/Alerovere/DroneDEM/blob/master/Results/sumplots.png)
 
 All the images and files are placed into the "Results" folder.
