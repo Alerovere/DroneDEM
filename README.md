@@ -7,4 +7,4 @@ The two required inputs are:
 
 <b>Drone_data_extract.m</b> - This script compares Control Points and DEM elevations, and produces a figure showing the result of the comparison for each DEM in the dataset. The script also writes the results of the DEM analysis as text, comma separated files. This script needs the Matlab 'Mapping Toolbox', 'Image Processing Toolbox' and 'Statistics and Machine Learning Toolbox'
 
-<b>Data_analysis.m</b> - This script takes the results of the previous step and plots them together into a summary figure. Before the final figure is produce, the user needs to insert manually the picture overlap, that is usually available in the processing reports of photogrammetric software. This script needs the Matlab 'Statistics and Machine Learning Toolbox'
+<b>Data_analysis.m</b> - This script takes the results of the previous step and plots them together into a summary figure. Before the final figure is produced, the user needs to insert manually the picture overlap, that is usually available in the processing reports of photogrammetric software. This script needs the Matlab 'Statistics and Machine Learning Toolbox'
