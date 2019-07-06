@@ -36,7 +36,6 @@ ylabel('Y coordinate [m]')
 CP.DEMval= mapinterp(DEM,R,CP.ETRS89_X,CP.ETRS89_Y);
 CP.diff=(CP.DEMval-CP.ElevMSL);
 scatter3(CP.ETRS89_X,CP.ETRS89_Y,CP.ETRS89_Z,10,'filled','MarkerfaceColor','w'); %plots CPs
-
 cntr=[mean(GCP.ETRS89_X) mean(GCP.ETRS89_Y)];
 scatter(mean(GCP.ETRS89_X),mean(GCP.ETRS89_Y),30,'o')
 CP.cntrdist(:)=pdist2([cntr(1,1) cntr(1,2)],[CP.ETRS89_X(:) CP.ETRS89_Y(:)],'euclidean');
@@ -53,8 +52,10 @@ subplot(2,3,2)
 histfit(CP.diff)
 xlabel('DEM - CP elevation [m]')
 diff=rmmissing(CP.diff);
-rmse = sqrt(immse(CP.DEMval,CP.ElevMSL));
-title ((strcat('Average=',sprintf('%.3f',mean(diff)),'m',{' '},'Stdev=',sprintf('%.3f',std(diff)),'m',{' '},'RMSE=',sprintf('%.3f',rmse),'m')))
+rmse = sqrt(mean((CP.ElevMSL - CP.DEMval).^2));  % Root Mean Squared Error
+title ((strcat('External to GCPs:Average=',sprintf('%.3f',mean(diff)),'m',{' '},'Stdev=',sprintf('%.3f',std(diff)),'m',{' '},'RMSE=',sprintf('%.3f',rmse),'m')))
+
+
 subplot(2,3,3)
 x=CP.cntrdist;
 y=CP.diff;
@@ -69,17 +70,16 @@ xlabel('Distance to the GCP centroid [m]')
 ylabel('DEM - CP elevation [m]')
 
 subplot(2,3,5)
-scatter(CP.ElevMSL,CP.diff,10,'filled','k')
-x=CP.ElevMSL;
-y=CP.diff;
-[p,S] = polyfit(x,y,1); 
-[y_fit,delta] = polyval(p,x,S);
-hold on
-plot(x,y_fit,'r-')
-plot(x,y_fit+delta,'m--',x,y_fit-delta,'m--')
-legend('Observations','Linear Fit','67% Prediction Interval')
-xlabel('Elevation of CP [m]')
-ylabel('DEM - CP elevation [m]')
+bound = boundary(GCP.ETRS89_X,GCP.ETRS89_Y,0.1);
+CP.Internal = inpolygon(CP.ETRS89_X,CP.ETRS89_Y,GCP.ETRS89_X(bound),GCP.ETRS89_Y(bound));
+CPInternal = CP(CP.Internal==1,:);
+hold on;
+histfit(CPInternal.diff)
+xlabel('DEM - CP elevation [m]')
+diffInternal=rmmissing(CPInternal.diff);
+rmseInternal = sqrt(mean((CPInternal.ElevMSL - CPInternal.DEMval).^2));  % Root Mean Squared Error
+
+title ((strcat('Internal to GCPs: Average=',sprintf('%.3f',mean(diffInternal)),'m',{' '},'Stdev=',sprintf('%.3f',std(diffInternal)),'m',{' '},'RMSE=',sprintf('%.3f',rmseInternal),'m')))
 
 subplot(2,3,6)
 scatter(CP.GCPdist,CP.diff,10,'filled','k')
