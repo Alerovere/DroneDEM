@@ -14,3 +14,5 @@ The two required inputs are:
 ![Results_2](https://github.com/Alerovere/DroneDEM/blob/master/Results/sumplots.png)
 
 All the images and files are placed into the "Results" folder.
+
+[![DOI](https://zenodo.org/badge/193851592.svg)](https://zenodo.org/badge/latestdoi/193851592)
